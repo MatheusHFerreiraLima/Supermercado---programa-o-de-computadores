@@ -1,2 +1,2 @@
-# Supermercado---programa-o-de-computadores
+# Supermercado---programacao-de-computadores
 Repositório para trabalho de Programação de Computadores
