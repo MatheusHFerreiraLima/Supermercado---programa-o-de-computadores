@@ -1,0 +1,40 @@
+def cadastro_itens():
+    global current_frame, codigo_barras_entry, nome_entry, valor_entry
+
+    if current_frame:
+        current_frame.destroy()
+
+    current_frame = tk.Frame(janela)
+    current_frame.pack(fill=tk.BOTH, expand=True)
+
+    label = tk.Label(current_frame, text="Cadastro de Itens", font=("Helvetica", 30))
+    label.pack(pady=20)
+
+    # Label e Entry para o código de barras
+    codigo_barras_label = tk.Label(current_frame, text="Código de Barras:")
+    codigo_barras_label.pack()
+    codigo_barras_entry = tk.Entry(current_frame)
+    codigo_barras_entry.pack()
+
+    # Label e Entry para o nome do produto
+    nome_label = tk.Label(current_frame, text="Nome do Produto:")
+    nome_label.pack()
+    nome_entry = tk.Entry(current_frame)
+    nome_entry.pack()
+
+    # Label e Entry para o valor do produto
+    valor_label = tk.Label(current_frame, text="Valor do Produto:")
+    valor_label.pack()
+    valor_entry = tk.Entry(current_frame)
+    valor_entry.pack()
+
+    # Botão de envio
+    submit_button = tk.Button(current_frame, text="Enviar", command=armazenar_dados)
+    submit_button.pack(pady=10)
+
+    button_home = tk.Button(current_frame, text="Página Inicial", font=("Italic", 20), bg="lightskyblue",
+                            command=inicio)
+    button_home.pack(pady=10)
+
+    # Alocando o ESC no botão "Página Inicial"
+    janela.bind('<Escape>', lambda event: inicio())
