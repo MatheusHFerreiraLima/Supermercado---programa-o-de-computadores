@@ -1,0 +1,55 @@
+def armazenar_dados():
+    global codigo_barras_entry, nome_entry, valor_entry
+
+    codigo_barras = codigo_barras_entry.get()
+    nome_produto = nome_entry.get()
+    valor_produto = valor_entry.get().replace(',', '.')  # Substituir vírgula por ponto
+
+    # Armazenar os dados no arquivo
+    # O "a" é utilizado para acrescentar algo no .txt
+    with open("produtos.txt", "a") as file:
+        file.write(
+            f"Código de Barras: {codigo_barras}, Nome do Produto: {nome_produto}, Valor do Produto: {valor_produto}\n")
+
+    # Limpar os campos de entrada após o envio
+    codigo_barras_entry.delete(0, tk.END)
+    nome_entry.delete(0, tk.END)
+    valor_entry.delete(0, tk.END)
+
+
+def buscar_produto():
+    global total, codigo_barras_entry
+
+    codigo_barras = codigo_barras_entry.get()
+
+    # Limpar o campo de entrada
+    codigo_barras_entry.delete(0, tk.END)
+
+    # Buscar o produto pelo código de barras
+    produto_encontrado = False
+    with open("produtos.txt", "r") as arquivo:
+        for line in arquivo:
+            if f"Código de Barras: {codigo_barras}" in line:
+                # Exibir o nome e o valor do produto na página inicial
+                produto_info = line.split(", ")
+                valor_produto = float(produto_info[2].split(": ")[1].replace(',', '.'))  # Substituir vírgula por ponto
+                total += valor_produto
+                produto_encontrado = True
+
+    # Atualizar o label de total
+    total_label.config(text=f"R$ {total:.2f}")
+
+    if not produto_encontrado:
+        tk.messagebox.showwarning("ERROR", "Produto não encontrado.")
+
+
+def pagamento():
+    global total
+
+    total = 0
+    total_label.config(text=f'R$ {total:.2f}')
+
+
+if __name__ == "__main__":
+    inicio()
+    janela.mainloop()
