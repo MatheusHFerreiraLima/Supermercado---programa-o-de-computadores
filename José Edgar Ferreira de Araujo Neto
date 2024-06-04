@@ -1,0 +1,54 @@
+def inicio():
+    global current_frame, total_label, total, codigo_barras_entry
+
+    if current_frame:
+        current_frame.destroy()
+
+    current_frame = tk.Frame(janela)
+    current_frame.pack(fill=tk.BOTH, expand=True)
+
+    pagina_inicial = tk.Label(current_frame, text="Página Inicial", font=("Helvetica", 18, "bold"))
+    pagina_inicial.pack(pady=20)
+
+    # Label e Entry para o código de barras
+    codigo_barras_label = tk.Label(current_frame, text="Código de Barras:")
+    codigo_barras_label.pack()
+    codigo_barras_entry = tk.Entry(current_frame)
+    codigo_barras_entry.pack()
+
+    # Label para aparecer NOME e VALOR do produto quando clicar em "Buscar Produto"
+    nome_valor_produto = tk.Label(current_frame, text="")
+    nome_valor_produto.place(x=250, y=250)
+
+    # Botão para buscar o produto
+    buscar_button = tk.Button(current_frame, text="Buscar Produto",
+                              font=("HEveltica", 12, 'bold'),
+                              foreground='white', background='limegreen',
+                              command=buscar_produto)
+    # Alocando a tecla ENTER no botão Buscar Produto
+    janela.bind("<Return>", lambda event: buscar_produto())
+    buscar_button.pack(pady=12)
+
+    # Botão para o cadastro dos itens
+    cadastro_itens_button = tk.Button(current_frame,
+                                      text="Cadastrar um novo item",
+                                      command=cadastro_itens)
+    cadastro_itens_button.place(x=650, y=0)
+
+    # Botão para realizar o pagamento
+    # Carregar a imagem
+    pagamento_button = tk.Button(current_frame, text="Realizar o pagamento",
+                                 font=("Helvetica", 13, 'bold'),
+                                 image=image,
+                                 compound="right",
+                                 background='limegreen',
+                                 foreground='white',
+                                 command=pagamento)
+    pagamento_button.place(x=500, y=350)
+
+
+    # Label para exibir o total
+    if total_label:
+        total_label.destroy()
+    total_label = tk.Label(current_frame, text=f"R$ {total:.2f}", font=("Helvetica", 25, 'bold'), foreground='green')
+    total_label.place(x=530, y=220)
