@@ -82,7 +82,7 @@ codigo_barras_entry = None
 nome_entry = None
 valor_entry = None
 
-image = tk.PhotoImage(file="carrinho_compras.png")
+image = tk.PhotoImage(file="codigo em python/carrinho_compras.png")
 image = image.subsample(5)
 
 
